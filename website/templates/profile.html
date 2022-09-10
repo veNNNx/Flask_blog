@@ -1,0 +1,103 @@
+{% extends "base.html" %} {% block title %}{{user.first_name}} Profile{% endblock %} {%block content%}
+<h1 align="center" style="color:aliceblue">{%if user.id == current_user.id%} My Profile {%else%} {{user.first_name}}'s profile  {%endif%}</h1>
+<div class="container">
+  <div class="row" id="profile-info">
+    <div class="col-7">
+<strong>Name:  {{user.first_name}}</strong> <br/>
+<strong>Last name:  {{user.last_name}}</strong> <br/>
+<strong>E-mail:  {{user.email}}</strong><br/>
+<strong>Id:  {{user.id}}</strong><br/>
+<strong>Picture Id:  {{user.picture}}</strong><br/>
+<strong>Accound modified:  {{user.date_modified}}</strong><br/>
+<strong>Account created:  {{user.date_created}}</strong><br/>
+<strong>Last activity:  {{user.last_active}}</strong><br/>
+<br/>
+{%if user.id == current_user.id or current_user.id == 1%}
+<a href='/delete-profile/{{ user.id }}' class="btn btn-danger">Delete acccount</a>
+{%endif%}
+</div>
+<div class="col-5"><br/>
+  <img src="{{image_profile}}" class="profile-avatar"  align="right">
+</div>
+</div>
+</div>
+</br>
+
+<br/>
+{%if user.id == current_user.id%}
+<div class = "card">
+<div class = "card-header"> Update profile information</div>
+<div class="card-body"> 
+  <form method="POST" action="/update-profile/{{ user.id }}" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="firstName"><b>Name</b></label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        name="firstName"
+        placeholder="Enter Name"
+        value={{user.first_name}}
+      />
+    </div>
+    <div class="form-group">
+      <label for="firstName"><b>Last Name</b></label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        name="lastName"
+        value={{user.last_name}}
+      />
+    </div>
+    <div class="mb-3">
+      <label for="picture" class="form-label"><b>Change profil picture</b></label>
+      <input class="form-control-file" id="picture" name="picture" type="file" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+</div>
+
+<br/> <br/>
+<div class = "card">
+  <div class = "card-header"> Update password </div>
+  <div class="card-body"> 
+    <form method="POST" action="/update-password/{{ user.id }}">
+<div class="form-group">
+  <label for="password1"><b>Password</b></label>
+  <input
+    type="password"
+    class="form-control"
+    id="password1"
+    name="password1"
+    placeholder="**********"
+  />
+</div>
+<div class="form-group">
+  <label for="password2"><b>Confirm password</b></label>
+  <input
+    type="password"
+    class="form-control"
+    id="password2"
+    name="password2"
+    placeholder="**********"
+  />
+</div>
+<div class="form-group">
+  <label for="password1"><b>Confirm with your password</b></label>
+  <input
+    type="password"
+    class="form-control"
+    id="control_password"
+    name="control_password"
+    placeholder="**********"
+  />
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+{%endif%}
+{%endblock%}

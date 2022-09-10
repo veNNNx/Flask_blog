@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {%block content%}
+<h1 align="center" >Blog Board</h1>
+<u1 class="list-group list-group-flash" id="notes">
+  
+  {% for note in notes %}
+  <li class="card">
+    <div class="card-body">
+      <h5 class="card-title"><b>{{note.title}}</b> 
+      <p class="alignright">
+        <a href="/like-post/{{note.id}}">
+          {% if current_user.id in note.likes|map(attribute="user_id")|list %}
+        <img src="/static/images/star-fill.svg"style="width:25px;">
+          {% else %}
+          <img src="/static/images/star.svg"style="width:25px;">
+          {% endif %}
+      </a>
+        &nbsp;{{note.likes|length}}  &nbsp;
+      {% if note in user.notes or current_user.id == 1%}
+      <button type="button" class="close" onClick="deleteNote({{ note.id }})">x
+    </button></p>
+    {% endif %}
+    </h5>
+    <h6 class="cart-subtitle"> 
+      {%if note.user %}
+        <img src="/static/profile_img/{{note.user.picture}}"  class="avatar" align="left"> <b>
+        &nbsp; <a href = "/profile/{{note.user.id}}">{{note.user.first_name}} {{note.user.last_name}}</a>
+      {%else%}
+        <img src="/static/profile_img/default_picture.jpg"  class="avatar" align="left"> <b>
+        &nbsp; <i>User deleted</i>
+      {%endif%}
+      </b><br/> &nbsp; <i> <font size="2">{{note.date}}</font></i></h6>
+      <p class="card-text">{{note.text}}
+      {%for comment in note.comments %}
+        <div class="card-subtext">
+      {% if comment.user %}
+        <img src="/static/profile_img/{{comment.user.picture}}"  class="avatar" align="left"> <b>
+        &nbsp; <a href = "/profile/{{comment.user.id}}"> {{comment.user.first_name}} {{comment.user.last_name}}</a></b>
+      {%else%}
+        <img src="/static/profile_img/default_picture.jpg"  class="avatar" align="left"> <b>
+        &nbsp; <i>User deleted</i>
+      {%endif%}
+      <br/>
+      &nbsp; <i><font size="2">{{comment.date}}</i></font></span>
+      </div>
+      <p class="card-text">{{comment.text}} </p>
+      {% endfor %}
+      <form method="POST" action="/create-comment/{{ note.id }}">
+        <div class="form-group mp-3">
+          <input type="text" class="form-control" name="comment" placeholder="Enter comment"/>
+        </div>
+      </form>
+    </div>
+  </li>
+  <br/>
+  {% endfor %}
+</u1>
+<form method="POST" action="/create-note">
+  <br />
+  <input type="text" id="opacity" name="title"class="form-control"  maxlength="100" placeholder="Title" />
+  <textarea name="note" id="opacity" class="form-control" placeholder="Some text"></textarea>
+  <br/>
+
+
+
+
+  <div align="center">
+    <button type="submit" class="btn btn-secondary btn-lg btn-block" >Add</button>
+  </div>
+</form>
+{%endblock%}

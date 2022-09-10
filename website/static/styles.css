@@ -1,0 +1,55 @@
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+.card{
+  opacity: 0.7
+}
+
+.card-title{
+  text-align: left;
+}
+#opacity{
+  opacity: 0.7
+}
+#profile-info{
+  border: 3px solid rgb(83, 52, 52);
+  color: rgb(0, 0, 0);
+}
+
+#like{
+  src: url("images/star.svg");
+}
+
+td{
+  overflow:hidden; 
+  word-wrap: break-word;
+  max-width:15px;
+}
+
+.admin-mode{
+  font-size: 40px;
+  text-align: center;
+  background-color: brown;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.profile-avatar {
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+ input[type=text]:focus {
+  border: 3px solid rgb(83, 52, 52);
+}

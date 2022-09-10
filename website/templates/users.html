@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+ {% block title %} Users {% endblock %} 
+{%block content%}
+<br/>
+
+<table class="table table-dark" id="opacity">
+    <thead>
+      <tr>
+        <th scope="col" style="width:2px">Avatar</th>
+        <th scope="col">Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">User Id</th>
+        <th scope="col">Last active</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+      <tr>
+        <td><a href = "/profile/{{user.id}}"><img src="{{url_for('static', filename='profile_img/' + user.picture)}}" class="avatar"/></a></td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>
+        {%if user.id == 1%}
+        <td>{{user.id}} [Admin]</td>
+        {% else %}
+        <td>{{user.id}}</td>
+        {% endif %}
+        <td>{{user.last_active}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+{%endblock%}
