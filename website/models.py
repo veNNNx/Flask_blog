@@ -22,6 +22,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(30))
     last_name = db.Column(db.String(30))
+    lat = db.Column(db.String(30))
+    lon = db.Column(db.String(30))
     date_created = db.Column(db.DateTime(timezone = True), default=datetime.datetime.now().replace(microsecond=0))
     date_modified = db.Column(db.DateTime(timezone = True), default=datetime.datetime.now().replace(microsecond=0))
     last_active = db.Column(db.DateTime(timezone = True), default=datetime.datetime.now().replace(microsecond=0))
@@ -29,7 +31,6 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', backref='user')
     likes = db.relationship('Like', backref='user', passive_deletes = True)
     picture = db.Column(db.String(300), default='default_picture.jpg')
-
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)

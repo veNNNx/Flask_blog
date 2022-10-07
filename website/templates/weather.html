@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %} Weather {% endblock %} 
+
+{% block content %}
+{% if user.lat and user.lon %}
+</br>
+    <h3 style='text-align: center;'>{{data["name"]}} <img src="http://openweathermap.org/img/wn/{{data['weather'][0]['icon']}}@2x.png"></h3>  
+    <h5>Temperature: {{data["main"]["temp"]}}°C </h5>
+    <h5>Pressure {{data["main"]["pressure"]}}Pa</h5>
+    <h5>Humidity {{data["main"]["humidity"]}}%</h5>
+    <h5>Sky: {{data["weather"][0]["main"]}}</h5>
+    <h5>Sunrise: {{sunrise}} </h5>
+    <h5>Sunset: {{sunset}} </h5>
+<br/>
+<p align = 'center'><iframe src = "https://maps.google.com/maps?q={{user.lat}},{{user.lon}}&hl=es;z=14&amp;output=embed" frameborder="0" style="border:0" width = 600 height = 400></iframe>
+    <br/>
+<button type="button" id = 'findMe' class="active" onClick="getLocation()">Find me!</button></p>
+
+{% else %}
+</br>
+    <p align = 'center'>
+    <button type="button" id = 'findMe' class="active" onClick="getLocation()">Click to find me!</button> </p>
+{% endif %}
+{% endblock %}

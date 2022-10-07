@@ -12,9 +12,11 @@
 .card-title{
   text-align: left;
 }
+
 #opacity{
   opacity: 0.7
 }
+
 #profile-info{
   border: 3px solid rgb(83, 52, 52);
   color: rgb(0, 0, 0);
@@ -52,4 +54,15 @@ td{
 
  input[type=text]:focus {
   border: 3px solid rgb(83, 52, 52);
+}
+
+#findMe {
+  background-color: #2f62d7; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
